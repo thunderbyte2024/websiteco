@@ -1,0 +1,1 @@
+# Static Page Hosting with GitHub Pages This repository contains the files for a simple static website. It demonstrates how to host a personal or project website using GitHub Pages. This method is ideal for sharing documentation, projects, or portfolio websites without needing any backend logic or server-side code. 
