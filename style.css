@@ -1,5 +1,6 @@
 body {
-  font-family: sans-serif;
+font-family: sans-serif;
+background: linear-gradient(to bottom, rgb(52,173,80) 0%, rgb(86,171,240) 50%,rgb(93,65,201) 90%); /* W3C */
 }
 
 h1, h2 {
