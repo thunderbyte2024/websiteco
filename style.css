@@ -1,0 +1,43 @@
+body {
+  font-family: sans-serif;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+fieldset {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+legend {
+  font-weight: bold;
+  padding: 10px;
+}
+
+.question {
+  margin-bottom: 15px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#results {
+  text-align: center;
+  margin-top: 20px;
+}
