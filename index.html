@@ -1,86 +1,258 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Grade 11 Functions Worksheet</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f9; color: #333; }
-        h1, h2 { color: #2c3e50; }
-        .section { margin-bottom: 30px; }
-        p, li { margin: 10px 0; }
-        ul { list-style: none; padding-left: 0; }
-        .emoji { font-size: 1.2em; margin-right: 5px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📷 TogAI: Text + Camera/Image Input SMurfy</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+    input, textarea, button, select {
+      margin: 10px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e91e63;
+    }
+    #response {
+      margin-top: 30px;
+      background-color: #fff;
+      color: #000;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      white-space: pre-wrap;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+	.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ff4081;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+  
+.custom-file-upload {
+  display: inline-block;
+  padding: 12px 20px;
+  cursor: pointer;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+.custom-file-upload:hover {
+  background: linear-gradient(to right, #e53935, #d32f2f);
+}
+
+</style>
 </head>
 <body>
-    <h1>Worksheet: Modeling Real-Life Situations Using Functions</h1>
-    <p><strong>Grade Level:</strong> Grade 11</p>
-    <p><strong>Topic:</strong> Accurately Constructing Mathematical Models Using Functions</p>
-    <p><strong>Learning Objective:</strong> Construct and interpret functions that model real-world scenarios.</p>
+  <h2>📷 TogAI: Text + Camera/Image Input</h2>
+  <h3>until Exhausted by Sir Antony</h3>
+  <h3>Smurfy Account</h3>
+  <label for="modelSelect">Select Model:</label>
+<select id="modelSelect" onchange="adjustFormForModel()" style="margin: 10px; padding: 12px; font-size: 16px;">
+<option value="meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8" data-vision=true>Llama-4-Maverick-17B-128E-Instruct-FP8</option>
+<option value="meta-llama/Llama-Vision-Free" data-vision=true>Meta Llama Vision Free</option>
+<option value="meta-llama/Llama-4-Scout-17B-16E-Instruct" data-vision=true>meta-llama/Llama-4-Scout-17B-16E-Instruct</option>
+<option value="meta-llama/Llama-3.2-11B-Vision-Instruct" data-vision=true>Llama-3.2-11B-Vision-Instruct</option>
+<option value="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-Free" data-vision=false>DeepSeek R1 Distill Llama 70B Free</option>
+<option value="deepseek-ai/DeepSeek-R1-0528" data-vision=false>Deepseek R1 0528</option>
+<option value="qwen/Qwen3-32B-FP8" data-vision=false>Qwen3 32B FP8</option>
+<option value="arcee-ai/AFM-4.5B-Preview" data-vision=false>AFM-4.5B-Preview</option>
+<option value="lg-ai/EXAONE-Deep-32B" data-vision=false>EXAONE Deep 32B</option>
+<option value="lg-ai/EXAONE-3.5-32B-Instruct" data-vision=false>EXAONE 3.5 32B Instruct</option>
+<option value="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free" data-vision=false>Meta Llama 3.3 70B Instruct Turbo Free</option>
+<option value="nim/nvidia/llama-3.3-nemotron-super-49b-v1" data-vision=false>NIM/NVIDIA LLaMA 3.3 Nemotron Super 49B</option>
+<option value="Qwen/Qwen2.5-7B-Instruct" data-vision=false>Qwen/Qwen2.5-7B-Instruct</option>
+<option value="Qwen/Qwen2.5-Coder-32B-Instruct" data-vision=false>Qwen/Qwen2.5-Coder-32B-Instruct</option>
+<option value="qwen/Qwen2.5-72B" data-vision=false>Qwen2.5 72B</option>
+<option value="qwen/Qwen2.5-3B-Instruct" data-vision=false>Qwen2.5 3B Instruct</option>
+<option value="qwen/Qwen2.5-7B-Instruct" data-vision=false>Qwen2.5 7B Instruct</option>
+<option value="qwen/Qwen2.5-14B" data-vision=false>Qwen2.5 14B</option>
+<option value="meta-llama/Llama-3.2-1B" data-vision=false>Llama 3.2 1B</option>
+<option value="qwen/Qwen2.5-1.5B-Instruct" data-vision=false>Qwen2.5 1.5B Instruct</option>
+<option value="deepseek-ai/DeepSeek-R1-Distill-Qwen-7B" data-vision=false>DeepSeek R1 Distill Qwen 7B</option>
+<option value="qwen/Qwen3-235B-A22b" data-vision=false>Qwen3 235B A22b</option>
+<option value="meta-llama/Llama-4-Maverick-17B-128E" data-vision=false>Llama 4 Maverick 17B 128E</option>
+<option value="qwen/Qwen2.5-3B" data-vision=false>Qwen2.5 3B</option>
+<option value="qwen/Qwen2.5-7B" data-vision=false>Qwen2.5 7B</option>
+<option value="qwen/Qwen2.5-32B-Instruct" data-vision=false>Qwen2.5 32B Instruct</option>
+<option value="togethercomputer/Mixtral-8x7b-v0.1" data-vision=false>Mixtral 8X7b V0.1</option>
+<option value="meta-llama/Llama-3.1-70B" data-vision=false>Llama 3.1 70B </option>
+<option value="togethercomputer/Llama-3.1-8B-Instruct-Awq-Int4" data-vision=false>Llama 3.1 8B Instruct Awq Int4</option>
+<option value="meta-llama/Llama-3.1-405B-Fp8" data-vision=false>Llama 3.1 405B FP8</option>
+<option value="Qwen/Qwen2.5-VL-7B-Instruct" data-vision=true>Qwen2.5-VL-7B-Instruct</option>
+</select>
 
-    <div class="section">
-        <h2>🔹 Part A: Guided Examples</h2>
-        <h3>Example 1 – Load Usage (Linear Function)</h3>
-        <p><span class="emoji">📱</span> Jane loads ₱100 on her phone. Each call costs ₱5.</p>
-        <p><strong>Let x</strong> be the number of calls, and <strong>y</strong> be the remaining load.</p>
-        <ul>
-            <li>a. Write the function: <strong>y = 100 - 5x</strong></li>
-            <li>b. How many calls can she make before her load runs out? <strong>x = 20</strong></li>
-        </ul>
+  <div id="imageInputSection">
+    <!--p id="webcamStatus">🔄 Attempting to access webcam...</p>
+    <video id="webcam" width="320" height="240" autoplay playsinline style="margin-top: 10px; border-radius: 10px; display:none;"></video><br>
+    <button onclick="startWebcam()">🎥 Start Webcam</button>
+    <button onclick="captureFromWebcam()" style="background-color: #4CAF50;">📸 Capture from Webcam</button><br>
+    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas-->
+    
+<label for="imageInput" class="custom-file-upload">📁 Choose File</label>
+<input type="file" id="imageInput" accept="image/*" style="display:none;" />
+<span id="fileName" style="color:white; font-size: 14px;"></span><br>
 
-        <h3>Example 2 – Weekly Savings (Linear Function)</h3>
-        <p><span class="emoji">💰</span> Luis saves ₱150 per week.</p>
-        <p><strong>Let x</strong> be the number of weeks, and <strong>S(x)</strong> the total savings.</p>
-        <ul>
-            <li>a. Write a function: <strong>S(x) = 150x</strong></li>
-            <li>b. Savings after 8 weeks: <strong>₱1,200</strong></li>
-        </ul>
-    </div>
+  </div>
 
-    <div class="section">
-        <h2>🔹 Part B: Practice Problems</h2>
-        <p><strong>1. Movie Tickets (Linear Function)</strong> <span class="emoji">🎬</span></p>
-        <ul>
-            <li>a. Write a function T(x) for the total cost of x tickets.</li>
-            <li>b. How much will 5 tickets cost?</li>
-        </ul>
+  <textarea id="userMessage" placeholder="Enter your message..." rows="5" style="width: 80%; font-size: 16px;"></textarea><br>
+  <button onclick="sendWithImage()" style="background-color: #4CAF50;" >🔄 Send Message</button>
+  
+  <div id="response">AI response will appear here.</div>
 
-        <p><strong>2. Falling Object (Quadratic Function)</strong> <span class="emoji">🍎</span></p>
-        <p>h(t) = -4.9t² + 20</p>
-        <ul>
-            <li>a. How high is the apple after 1 second?</li>
-            <li>b. When will the apple hit the ground?</li>
-        </ul>
+  <script>
+  
+    function startWebcam() {
+      const video = document.getElementById("webcam");
+      const status = document.getElementById("webcamStatus");
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          video.srcObject = stream;
+          video.style.display = "block";
+          status.textContent = "✅ Webcam is active.";
+        })
+        .catch(err => {
+          console.error("Webcam access denied:", err);
+          status.textContent = "❌ Webcam access denied or not available.";
+        });
+    }
 
-        <p><strong>3. Bacteria Growth (Exponential Function)</strong> <span class="emoji">🧫</span></p>
-        <ul>
-            <li>a. Write a function P(t) for population after t hours.</li>
-            <li>b. What is the population after 4 hours?</li>
-        </ul>
+    function captureFromWebcam() {
+      const video = document.getElementById("webcam");
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(blob => {
+        const file = new File([blob], "webcam.jpg", { type: "image/jpeg" });
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        document.getElementById("imageInput").files = dataTransfer.files;
+      }, "image/jpeg");
+    }
 
-        <p><strong>4. Cellphone Value (Exponential Decay)</strong> <span class="emoji">📱</span></p>
-        <ul>
-            <li>a. Write a function V(t) for value after t years.</li>
-            <li>b. What will be its value after 2 years?</li>
-        </ul>
+    function adjustFormForModel() {
+      const modelSelect = document.getElementById("modelSelect");
+      const selectedOption = modelSelect.options[modelSelect.selectedIndex];
+      const isVision = selectedOption.getAttribute("data-vision") === "true";
+      document.getElementById("imageInputSection").style.display = isVision ? "block" : "none";
+    }
 
-        <p><strong>5. Tuition Fee Increase (Linear Function)</strong> <span class="emoji">🎓</span></p>
-        <ul>
-            <li>a. Write a function F(x) for the tuition fee x years from now.</li>
-            <li>b. What will the fee be in 3 years?</li>
-        </ul>
-    </div>
+  async 
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const base64String = reader.result.split(',')[1]; // Strip "data:*/*;base64," prefix
+      resolve(base64String);
+    };
+    reader.onerror = error => reject(error);
+  });
+}
 
-    <div class="section">
-        <h2>🔹 Part C: Challenge Problem</h2>
-        <p><strong>Water Tank (Piecewise Function)</strong> <span class="emoji">🚰</span></p>
-        <ul>
-            <li>- First 2 minutes: 10 L/min</li>
-            <li>- Next 3 minutes: 5 L/min</li>
-            <li>- After 5 minutes: Stops filling</li>
-        </ul>
-        <p>a. Define a piecewise function W(t) for total water in the tank.</p>
-        <p>b. How much water is in the tank after 5 minutes?</p>
-    </div>
+
+function sendWithImage() {
+  const message = document.getElementById("userMessage").value;
+  const fileInput = document.getElementById("imageInput");
+  const resultDiv = document.getElementById("response");
+  const sendBtn = document.querySelector('button[onclick="sendWithImage()"]');
+
+  const selectedModel = document.getElementById("modelSelect").value;
+  const selectedOption = document.getElementById("modelSelect").selectedOptions[0];
+  const isVision = selectedOption.getAttribute("data-vision") === "true";
+
+  if (!message || (isVision && fileInput.files.length === 0)) {
+    resultDiv.innerHTML = "Please enter a message" + (isVision ? " and select an image." : ".");
+    return;
+  }
+
+  // Show spinner and disable button
+  resultDiv.innerHTML = `<div><span class="spinner"></span>Sending message, please wait...</div>`;
+  sendBtn.disabled = true;
+  sendBtn.textContent = "⏳ Sending... Please wait.";
+
+  let content = [{ type: "text", text: message }];
+  if (isVision) {
+    const file = fileInput.files[0];
+    const base64 = await toBase64(file);
+    const imageDataURL = `data:${file.type};base64,${base64}`;
+    content.push({ type: "image_url", image_url: { url: imageDataURL } });
+  }
+
+  const payload = {
+    model: selectedModel,
+    messages: [{ role: "user", content }],
+    stream: false
+  };
+
+  const apiKey = "tgp_v1_Yum_eXp66_S4GKTq9ACBiS7qI7Q8uzXMCf6DPM3x3bQ";
+  const endpoint = "https://api.together.xyz/v1/chat/completions";
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+    if (data.choices && data.choices.length > 0) {
+      resultDiv.innerHTML = data.choices[0].message.content;
+    } else {
+      resultDiv.innerHTML = "No response from model.";
+    }
+  } catch (err) {
+    console.error("Error:", err);
+    resultDiv.innerHTML = "An error occurred.";
+  }
+
+  // Re-enable button
+  sendBtn.disabled = false;
+  sendBtn.textContent = "🔄 Send Message";
+}
+
+  
+document.getElementById("imageInput").addEventListener("change", function() {
+  const fileName = this.files.length > 0 ? this.files[0].name : "No file chosen";
+  document.getElementById("fileName").textContent = fileName;
+});
+
+</script>
 </body>
 </html>
